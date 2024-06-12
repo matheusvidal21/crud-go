@@ -5,11 +5,11 @@ import (
 	"github.com/matheusvidal21/crud-go/src/configuration/rest_err"
 )
 
-func FindUserById(c *gin.Context) {
+func (uc *UserController) FindUserById(c *gin.Context) {
 	err := rest_err.NewBadRequestError("User not found")
 	c.JSON(err.Code, err)
 }
 
-func FindUserByEmail(c *gin.Context) {
+func (uc *UserController) FindUserByEmail(c *gin.Context) {
 
 }

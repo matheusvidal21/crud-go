@@ -4,6 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func DeleteUser(c *gin.Context) {
+func (uc *UserController) DeleteUser(c *gin.Context) {
 
 }

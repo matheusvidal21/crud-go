@@ -5,7 +5,7 @@ import (
 	"github.com/matheusvidal21/crud-go/src/controller"
 )
 
-func InitRoutes(r *gin.RouterGroup) {
+func InitRoutes(r *gin.RouterGroup, controller controller.UserControllerInterface) {
 	r.GET("/getUserById/:userId", controller.FindUserById)
 	r.GET("/getUserByEmail/:userEmail", controller.FindUserByEmail)
 	r.POST("/createUser/", controller.CreateUser)
