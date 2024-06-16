@@ -11,12 +11,8 @@ import (
 	"os"
 )
 
-const (
-	MONGODB_USER_COLLECTION = "MONGODB_USER_COLLECTION"
-)
-
 func (ur *userRepository) CreateUser(userDomain model.UserDomainInterface) (model.UserDomainInterface, *rest_err.RestErr) {
-	logger.Info("Init createUser repository")
+	logger.Info("Init createUser repository", zap.String("journey", "create_user_repository"))
 	collection_name := os.Getenv(MONGODB_USER_COLLECTION)
 
 	collection := ur.database.Collection(collection_name)
