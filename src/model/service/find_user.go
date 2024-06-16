@@ -8,8 +8,9 @@ import (
 )
 
 var (
-	journey_find_user_by_id_services    = "find_user_by_id_services"
-	journey_find_user_by_email_services = "find_user_by_email_services"
+	journey_find_user_by_id_services                 = "find_user_by_id_services"
+	journey_find_user_by_email_services              = "find_user_by_email_services"
+	journey_find_user_by_email_and_password_services = "find_user_by_email_and_password_services"
 )
 
 func (ud *userDomainService) FindUserByIDServices(id string) (model.UserDomainInterface, *rest_err.RestErr) {
@@ -35,5 +36,18 @@ func (ud *userDomainService) FindUserByEmailServices(email string) (model.UserDo
 	logger.Info("FindUserByEmail services executed with success",
 		zap.String("email", email),
 		zap.String("journey", journey_find_user_by_email_services))
+	return user, nil
+}
+
+func (ud *userDomainService) findUserByEmailAndPasswordServices(email, password string) (model.UserDomainInterface, *rest_err.RestErr) {
+	logger.Info("Init findUserByEmailAndPassword services", zap.String("journey", journey_find_user_by_email_and_password_services))
+	user, err := ud.repository.FindUserByEmailAndPassword(email, password)
+	if err != nil {
+		logger.Error("Error trying to call repository", err, zap.String("journey", journey_find_user_by_email_and_password_services))
+		return nil, err
+	}
+	logger.Info("FindUserByEmailAndPassword services executed with success",
+		zap.String("email", email),
+		zap.String("journey", journey_find_user_by_email_and_password_services))
 	return user, nil
 }
