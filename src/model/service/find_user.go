@@ -14,10 +14,26 @@ var (
 
 func (ud *userDomainService) FindUserByIDServices(id string) (model.UserDomainInterface, *rest_err.RestErr) {
 	logger.Info("Init findUserByID services", zap.String("journey", journey_find_user_by_id_services))
-	return ud.repository.FindUserByID(id)
+	user, err := ud.repository.FindUserByID(id)
+	if err != nil {
+		logger.Error("Error trying to call repository", err, zap.String("journey", journey_find_user_by_id_services))
+		return nil, err
+	}
+	logger.Info("FindUserByID services executed with success",
+		zap.String("user_id", id),
+		zap.String("journey", journey_find_user_by_id_services))
+	return user, nil
 }
 
 func (ud *userDomainService) FindUserByEmailServices(email string) (model.UserDomainInterface, *rest_err.RestErr) {
 	logger.Info("Init findUserByEmail services", zap.String("journey", journey_find_user_by_email_services))
-	return ud.repository.FindUserByEmail(email)
+	user, err := ud.repository.FindUserByEmail(email)
+	if err != nil {
+		logger.Error("Error trying to call repository", err, zap.String("journey", journey_find_user_by_email_services))
+		return nil, err
+	}
+	logger.Info("FindUserByEmail services executed with success",
+		zap.String("email", email),
+		zap.String("journey", journey_find_user_by_email_services))
+	return user, nil
 }
