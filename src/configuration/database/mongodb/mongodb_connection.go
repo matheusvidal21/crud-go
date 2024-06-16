@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	MONGODB_URL     = "MONGODB_URLO"
+	MONGODB_URL     = "MONGODB_URL"
 	MONGODB_USER_DB = "MONGODB_USER_DB"
 )
 
