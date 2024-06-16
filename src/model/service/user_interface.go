@@ -17,8 +17,9 @@ func NewUserDomainService(repository repository.UserRepository) UserDomainServic
 }
 
 type UserDomainService interface {
-	CreateUser(domainInterface model.UserDomainInterface) (model.UserDomainInterface, *rest_err.RestErr)
-	UpdateUser(string, model.UserDomainInterface) *rest_err.RestErr
-	FindUser(string) (model.UserDomainInterface, *rest_err.RestErr)
-	DeleteUser(string) *rest_err.RestErr
+	CreateUserServices(domainInterface model.UserDomainInterface) (model.UserDomainInterface, *rest_err.RestErr)
+	UpdateUserServices(string, model.UserDomainInterface) *rest_err.RestErr
+	FindUserByIDServices(id string) (model.UserDomainInterface, *rest_err.RestErr)
+	FindUserByEmailServices(email string) (model.UserDomainInterface, *rest_err.RestErr)
+	DeleteUserServices(string) *rest_err.RestErr
 }

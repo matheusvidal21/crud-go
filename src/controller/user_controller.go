@@ -6,7 +6,7 @@ import (
 )
 
 type UserControllerInterface interface {
-	FindUserById(c *gin.Context)
+	FindUserByID(c *gin.Context)
 	FindUserByEmail(c *gin.Context)
 	CreateUser(c *gin.Context)
 	UpdateUser(c *gin.Context)
