@@ -10,10 +10,10 @@ import (
 	"testing"
 )
 
-func TestUserRepository_CreateUser(t *testing.T) {
+func TestUserRepository_UpdateUser(t *testing.T) {
 	mtestDb := setupTest(t)
 
-	mtestDb.Run("when_sending_a_valid_domain_returns_success", func(mt *mtest.T) {
+	mtestDb.Run("when_sending_a_valid_user_return_success", func(mt *mtest.T) {
 		mt.AddMockResponses(bson.D{
 			{Key: "ok", Value: 1},
 			{Key: "n", Value: 1},
@@ -22,17 +22,12 @@ func TestUserRepository_CreateUser(t *testing.T) {
 		databaseMock := mt.Client.Database(database_name)
 		repo := repository.NewUserRepository(databaseMock)
 		domain := model.NewUserDomain("teste@teste.com", "@#12345", "Teste", 20)
-		userDomain, err := repo.CreateUser(domain)
 
-		_, errId := primitive.ObjectIDFromHex(userDomain.GetID())
+		domain.SetID(primitive.NewObjectID().Hex())
+
+		err := repo.UpdateUser(domain.GetID(), domain)
 
 		assert.Nil(t, err)
-		assert.Nil(t, errId)
-		assert.EqualValues(t, userDomain.GetEmail(), domain.GetEmail())
-		assert.EqualValues(t, userDomain.GetPassword(), domain.GetPassword())
-		assert.EqualValues(t, userDomain.GetName(), domain.GetName())
-		assert.EqualValues(t, userDomain.GetAge(), domain.GetAge())
-
 	})
 
 	mtestDb.Run("return_error_from_database", func(mt *mtest.T) {
@@ -42,9 +37,11 @@ func TestUserRepository_CreateUser(t *testing.T) {
 		databaseMock := mt.Client.Database(database_name)
 		repo := repository.NewUserRepository(databaseMock)
 		domain := model.NewUserDomain("teste@teste.com", "@#12345", "Teste", 20)
-		userDomain, err := repo.CreateUser(domain)
+
+		domain.SetID(primitive.NewObjectID().Hex())
+
+		err := repo.UpdateUser(domain.GetID(), domain)
 
 		assert.NotNil(t, err)
-		assert.Nil(t, userDomain)
 	})
 }

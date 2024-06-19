@@ -1,4 +1,4 @@
-package repository
+package repository_test
 
 import (
 	"fmt"
@@ -8,18 +8,11 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo/integration/mtest"
-	"os"
 	"testing"
 )
 
 func TestUserRepository_FindUserByEmail(t *testing.T) {
-	database_name := "user_database_test"
-	collection_name := "user_collection_test"
-
-	os.Setenv("MONGODB_USER_COLLECTION", collection_name)
-	defer os.Clearenv()
-
-	mtestDb := mtest.New(t, mtest.NewOptions().ClientType(mtest.Mock))
+	mtestDb := setupTest(t)
 
 	mtestDb.Run("when_sending_a_valid_email_returns_success", func(mt *mtest.T) {
 		userEntity := entity.UserEntity{
@@ -72,13 +65,7 @@ func TestUserRepository_FindUserByEmail(t *testing.T) {
 }
 
 func TestUserRepository_FindUserById(t *testing.T) {
-	database_name := "user_database_test"
-	collection_name := "user_collection_test"
-
-	os.Setenv("MONGODB_USER_COLLECTION", collection_name)
-	defer os.Clearenv()
-
-	mtestDb := mtest.New(t, mtest.NewOptions().ClientType(mtest.Mock))
+	mtestDb := setupTest(t)
 
 	mtestDb.Run("when_sending_a_valid_id_returns_success", func(mt *mtest.T) {
 		userEntity := entity.UserEntity{
@@ -131,13 +118,7 @@ func TestUserRepository_FindUserById(t *testing.T) {
 }
 
 func TestUserRepository_FindUserByEmailAndPassword(t *testing.T) {
-	database_name := "user_database_test"
-	collection_name := "user_collection_test"
-
-	os.Setenv("MONGODB_USER_COLLECTION", collection_name)
-	defer os.Clearenv()
-
-	mtestDb := mtest.New(t, mtest.NewOptions().ClientType(mtest.Mock))
+	mtestDb := setupTest(t)
 
 	mtestDb.Run("when_sending_a_valid_email_and_password_returns_success", func(mt *mtest.T) {
 		userEntity := entity.UserEntity{
