@@ -26,7 +26,7 @@ func (uc *UserController) LoginUser(c *gin.Context) {
 	}
 
 	domain := model.NewUserLoginDomain(userRequest.Email, userRequest.Password)
-	domainResult, err := uc.userService.LoginUserServices(domain)
+	domainResult, token, err := uc.userService.LoginUserServices(domain)
 	if err != nil {
 		logger.Error("Error trying to call LoginUser service", err, zap.String("journey", journey_login_user_controller))
 		c.JSON(err.Code, err)
@@ -36,5 +36,6 @@ func (uc *UserController) LoginUser(c *gin.Context) {
 	logger.Info("LoginUser controller executed successfully",
 		zap.String("user_id", domainResult.GetID()),
 		zap.String("journey", journey_login_user_controller))
+	c.Header("Authorization", token)
 	c.JSON(http.StatusCreated, view.ConvertDomainToResponse(domainResult))
 }
