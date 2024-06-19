@@ -1,9 +1,11 @@
 package controller
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/matheusvidal21/crud-go/src/configuration/logger"
 	"github.com/matheusvidal21/crud-go/src/configuration/rest_err"
+	"github.com/matheusvidal21/crud-go/src/model"
 	"github.com/matheusvidal21/crud-go/src/view"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap"
@@ -18,6 +20,13 @@ var (
 
 func (uc *UserController) FindUserByID(c *gin.Context) {
 	logger.Info("Init FindUserByID controller", zap.String("journey", journey_find_user_by_id))
+
+	user, err := model.VerifyToken(c.Request.Header.Get("Authorization"))
+	if err != nil {
+		c.JSON(err.Code, err)
+		return
+	}
+	logger.Info(fmt.Sprintf("User autheticaded: %#v", user))
 
 	userId := c.Param("userId")
 	if _, err := primitive.ObjectIDFromHex(userId); err != nil {
@@ -44,6 +53,13 @@ func (uc *UserController) FindUserByID(c *gin.Context) {
 
 func (uc *UserController) FindUserByEmail(c *gin.Context) {
 	logger.Info("Init FindUserByEmail controller", zap.String("journey", journey_find_user_by_email))
+
+	user, err := model.VerifyToken(c.Request.Header.Get("Authorization"))
+	if err != nil {
+		c.JSON(err.Code, err)
+		return
+	}
+	logger.Info(fmt.Sprintf("User autheticaded: %#v", user))
 
 	userEmail := c.Param("userEmail")
 	if _, err := mail.ParseAddress(userEmail); err != nil {
