@@ -15,7 +15,7 @@ func (ud *userDomainService) LoginUserServices(userDomain model.UserDomainInterf
 	logger.Info("Init LoginUser service", zap.String("journey", journey_login_user_service))
 
 	userDomain.EncryptPassword()
-	user, err := ud.findUserByEmailAndPasswordServices(userDomain.GetEmail(), userDomain.GetPassword())
+	user, err := ud.FindUserByEmailAndPasswordServices(userDomain.GetEmail(), userDomain.GetPassword())
 	if err != nil {
 		logger.Error("Error trying to find user by email and password", err, zap.String("journey", journey_login_user_service))
 		return nil, "", err

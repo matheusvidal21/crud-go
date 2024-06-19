@@ -39,7 +39,7 @@ func (ud *userDomainService) FindUserByEmailServices(email string) (model.UserDo
 	return user, nil
 }
 
-func (ud *userDomainService) findUserByEmailAndPasswordServices(email, password string) (model.UserDomainInterface, *rest_err.RestErr) {
+func (ud *userDomainService) FindUserByEmailAndPasswordServices(email, password string) (model.UserDomainInterface, *rest_err.RestErr) {
 	logger.Info("Init findUserByEmailAndPassword services", zap.String("journey", journey_find_user_by_email_and_password_services))
 	user, err := ud.repository.FindUserByEmailAndPassword(email, password)
 	if err != nil {
