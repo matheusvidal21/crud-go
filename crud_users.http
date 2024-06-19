@@ -4,7 +4,7 @@ Accept: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjIwLCJlbWFpbCI6Imh1bmNvZGluZ0BnbWFpbC5jb20iLCJleHAiOjE3MTg5MTAyMjgsImlkIjoiNjY3MzI3YjEyMDlhMjk2ZTBkZDQwZjY0IiwibmFtZSI6Ikh1bmNvZGluZyJ9.-GlSCfEtpYYKAdWCbLaZpVLS6TAFFS-qsRWGdIhTCyk
 ###
 
-// Buscar usuário no banco de dados por email
+// Buscar usuário no banco de dados por id
 GET http://localhost:8080/getUserById/667327b1209a296e0dd40f64
 Accept: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjIwLCJlbWFpbCI6Imh1bmNvZGluZ0BnbWFpbC5jb20iLCJleHAiOjE3MTg5MTAyMjgsImlkIjoiNjY3MzI3YjEyMDlhMjk2ZTBkZDQwZjY0IiwibmFtZSI6Ikh1bmNvZGluZyJ9.-GlSCfEtpYYKAdWCbLaZpVLS6TAFFS-qsRWGdIhTCyk
