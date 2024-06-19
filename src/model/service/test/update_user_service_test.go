@@ -24,7 +24,7 @@ func TestUserDomainService_UpdateUserServices(t *testing.T) {
 		assert.Nil(t, err)
 	})
 
-	t.Run("when_sending_a_valid_user_and_userId_return_error", func(t *testing.T) {
+	t.Run("when_sending_a_valid_user_and_userId_returns_error", func(t *testing.T) {
 		id := primitive.NewObjectID().Hex()
 
 		userDomain := model.NewUserDomain("teste@teste.com", "testpass", "test", 50)
