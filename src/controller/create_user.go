@@ -26,6 +26,7 @@ func (uc *UserController) CreateUser(c *gin.Context) {
 		logger.Error("Error trying to validate user info", err, zap.String("journey", journey_create_user_controller))
 		restErr := validation.ValidateUserError(err)
 		c.JSON(restErr.Code, restErr)
+		return
 	}
 
 	domain := model.NewUserDomain(userRequest.Email, userRequest.Password, userRequest.Name, userRequest.Age)
