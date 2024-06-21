@@ -23,6 +23,7 @@ func (uc *UserController) LoginUser(c *gin.Context) {
 		logger.Error("Error trying to validate user info", err, zap.String("journey", journey_login_user_controller))
 		restErr := validation.ValidateUserError(err)
 		c.JSON(restErr.Code, restErr)
+		return
 	}
 
 	domain := model.NewUserLoginDomain(userRequest.Email, userRequest.Password)
@@ -37,5 +38,5 @@ func (uc *UserController) LoginUser(c *gin.Context) {
 		zap.String("user_id", domainResult.GetID()),
 		zap.String("journey", journey_login_user_controller))
 	c.Header("Authorization", token)
-	c.JSON(http.StatusCreated, view.ConvertDomainToResponse(domainResult))
+	c.JSON(http.StatusOK, view.ConvertDomainToResponse(domainResult))
 }
