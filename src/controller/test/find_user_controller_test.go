@@ -12,7 +12,7 @@ import (
 	"testing"
 )
 
-func TestUserController_FindByEmail(t *testing.T) {
+func TestUserController_FindUserByEmail(t *testing.T) {
 	service, controller := SetupTest(t)
 
 	t.Run("email_is_invalid_returns_error", func(t *testing.T) {
@@ -69,7 +69,7 @@ func TestUserController_FindByEmail(t *testing.T) {
 	})
 }
 
-func TestUserController_FindById(t *testing.T) {
+func TestUserController_FindUserById(t *testing.T) {
 	service, controller := SetupTest(t)
 
 	t.Run("id_is_invalid_returns_error", func(t *testing.T) {
